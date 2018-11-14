@@ -8,30 +8,45 @@ Input: Sorted array
   
 */
 
-
 const BinarySearch = (arr, target) => {
-   const start = 0;
-   const end = arr.length -1;
-   
-  return Search(arr, target, start, end);
-}
+  let start = -1;
+  let end = arr.length;
 
+  if (!target) {
+    return null;
+  }
+  while (start + 1 < end) {
+    const mid = start + Math.floor((end - start) / 2);
+    if (arr[mid] === target) {
+      return mid;
+    }
+    if (target < arr[mid]) {
+      end = mid;
+    }
+    if (target > arr[mid]) {
+      start = mid;
+    }
+  }
+  return null;
 
-const Search = (arr, target, start, end) => {
-  const mid = start + Math.floor((start+end) / 2);
-   if(start < end) {
-     if(arr[mid] === target) {
-       return mid;
-     }
-     if(target < arr[mid]) {
-       return Search(arr, target, start, mid-1);
-     }
-     if(target > arr[mid]) {
-       return Search(arr, target, mid+1, end);
-     }
-   }
-   return null;
-}
+  // invoke recursive function
+};
 
+/* ***** RECURSIVE WAY ******  */
+// const Search = (arr, target, start, end) => {
+//   let mid = start + Math.floor((end-start) / 2);
+//    if(start < end) {
+//      if(arr[mid] === target) {
+//        return mid;
+//      }
+//      else if(target < arr[mid]) {
+//        return Search(arr, target, start, mid);
+//      }
+//      else {
+//        return Search(arr, target, mid, end);
+//      }
+//    }
+//    return null;
+// }
 
-console.log(BinarySearch([1,2,3,4,5,6,7,8], 3));
+// console.log(BinarySearch([1,2,3,4,5,6,7,8], 2));
